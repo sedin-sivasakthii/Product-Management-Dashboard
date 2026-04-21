@@ -1,0 +1,28 @@
+<div
+  class="product-card"
+  [ngStyle]="{
+    borderColor: product.stockCount <= 5 ? '#dc2626' : '#16a34a'
+  }"
+>
+  <img [src]="product.image" [alt]="product.name" class="product-image" />
+
+  <div class="product-content">
+    <div class="product-header">
+      <h3>{{ product.name }}</h3>
+      <p class="price">{{ product.price | currencyFormatter:'en-IN':'INR' }}</p>
+    </div>
+
+    <p class="description">{{ product.description }}</p>
+
+    <p class="stock" [class.low-stock]="product.stockCount <= 5">
+      Stock: {{ product.stockCount }}
+    </p>
+
+    <p class="added-date">Added {{ product.addedDate | timeAgo }}</p>
+
+    <app-star-rating
+      [currentRating]="product.rating"
+      (ratingSelected)="onRatingSelected($event)"
+    ></app-star-rating>
+  </div>
+</div>
